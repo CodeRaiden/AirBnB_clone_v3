@@ -22,6 +22,12 @@ app.config['JSONIFY_PRETTYPRINT_REGULAR'] = True
 app.register_blueprint(app_views)
 
 
+@app.errorhandler(404)
+def error_404(err):
+    """Produce a 404 error message"""
+    return make_response(jsonify(error="Not found"), 404)
+
+
 @app.teardown_appcontext
 def close_storage(exe):
     """closes storage"""
